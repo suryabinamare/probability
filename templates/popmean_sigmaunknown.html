@@ -1,0 +1,217 @@
+{% extends "sidebar.html" %}
+{% block title %}One Population Mean{% endblock %}
+{% block content %}
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+<h2>Parameter Estimation and Hypothesis Testing: A Population Mean (unknown variance)</h2>
+<p class = "left-aligned">We focus on estimating and testing hypotheses about a population mean, \(\mu\), when the population standard deviation, 
+\(\sigma\), is unknown.</p>
+<ol style = "font-family: 'times New Roman', Times, serif; font-size: large; "text-align: left;"> 
+    <li> Parameter Estimation: The sample mean is used to estimate the population mean. It is an unbiased estimator
+        of \(\mu\) with a standard error of \( \frac{\sigma}{\sqrt{n}} \), where \(n\) is the sample size. Sometimes finding a range of 
+    values is more important than a single point estimate. This is done by constructing a confidence interval in which the parameter lies.
+    </li>
+    <li> Hypothesis Testing: We test hypotheses about the population mean using the T-test when \(\sigma\) is unknown. The null hypothesis, \(H_0\), 
+        typically states that the population mean is equal to a specific value, \(\mu_0\). The alternative hypothesis, \(H_a\), 
+        can be two-tailed or one-tailed, depending on the research question.
+       
+</ol>
+  
+</div>
+
+
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h4 class = "left-aligned"><strong> Confidence Interval:</strong></h4>
+    <p class = "left-aligned"> Using sample data and t-distribution, we construct (1-\(\alpha\))100% confidence interval for the population mean, \(\mu\).
+        If the significance level, \(\alpha\) is 0.05, then we are (1-0.05)100% = 95% confident that the interval contains the true population mean, \(\mu\).
+        We interpret this as if we were to take many samples and construct confidence intervals for each sample, approximately 95% of those intervals would 
+        contain the true population mean, \(\mu\). 
+        We use the t-distribution because the population standard deviation, \(\sigma\), is unknown and we estimate it using the sample standard deviation, \(s\).
+        <br> <br>
+        To construct the confidence interval, we use the following steps:</p>
+       
+
+    <p class = "left-aligned">
+        1. Determine the sample mean (\(\bar{x}\)), sample standard deviation (\(s\)), sample size (\(n\)), and significance level (\(\alpha\)).</br>
+        2. Find the critical t-value (\(t_{\alpha/2, \, df}\)) from the t-distribution table corresponding to the desired confidence level and degrees of freedom (\(df = n - 1\)).</br>
+        3. Calculate the margin of error (ME) using the formula: </br>
+            \[ ME = t_{\alpha/2, \, df} \cdot \frac{s}{\sqrt{n}} \] </br>
+        4. Construct the confidence interval (CI) using the formula:</br>
+            \[P(-t_{\alpha/2, \, df} \leq T \leq t_{\alpha/2, \, df}) = 1 - \alpha \]
+            \[P(-t_{\alpha/2, \, df} \leq \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}} \leq t_{\alpha/2, \, df}) = 1 - \alpha \]
+            We solve the inequality for \(\mu\) to get the confidence interval:
+            \[ -t_{\alpha/2, \, df} \leq \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}} \leq t_{\alpha/2, \, df}\]
+            \[ \bar{x} - t_{\alpha/2, \, df} \cdot \frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + t_{\alpha/2, \, df} \cdot \frac{s}{\sqrt{n}} \]
+         Thus, the (1-\(\alpha\))100% confidence interval is given by:
+            
+            \[ CI = \left(\bar{x} - \frac{s}{\sqrt{n}}t_{\alpha/2, \, df}, \quad \bar{x} + \frac{s}{\sqrt{n}}t_{\alpha/2, \, df}\right) \]
+            or 
+            \[ CI = \left(\bar{x} - ME, \quad \bar{x} + ME\right) \]
+    </p>
+        <br>
+        
+        
+    <div  id = "ci-result-container" style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+        <h4>Provide the following values to calculate and plot CI:</h4>
+        
+        <hr style = "border: 1px solid #1a1717; width: 100%;">
+
+        <br> <br>
+        <strong> Sample Mean (\(\bar{x}\)):  </strong><input type = "number"  id = "mu0" value = "0" style="width: 100px; border-radius: 5px;"> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample Std (\(s\)): </strong><input type = "number"  id = "sigma" value = "1" style="width: 100px; border-radius: 5px;"> <br><br>
+        <strong>Degree of Freedom (DF): </strong><input type = "number"  id = "df" value = "29" style="width: 100px; border-radius: 5px;">&nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sig. Level (\(\alpha\)): </strong><input type = "number"  id = "alpha" value = "0.05" style="width: 100px; border-radius: 5px;"> &nbsp; &nbsp;<br><br>
+        <strong> Sample Size(n): </strong><input type = "range" min="1" max="1000" id = "n" value = "30" style="width: 400px;"> 
+            <span id="samplesize">30</span>
+        <br><br>
+        <button  id = "calculate-btn" onclick="calculate_ci_unknown()" class = "fancy-button" style="width: 200px; border-radius: 5px;">Calculate CI</button>
+        
+        <br><br>
+        <h4> Confidence Interval: </h4>
+        <p id="ci-result"></p>
+        <img id="ci-plot" src="" style="max-width: 100%; height: auto; border-radius: 8px;">
+    </div>
+</div>
+
+
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h2 class = "left-aligned">Hypothesis Testing for Population Mean (σ unknown)</h2>
+    <p class = "left-aligned">We perform hypothesis testing for a population mean when the population standard deviation, \(\sigma\), is unknown.
+        We use the t-test to determine whether to reject or fail to reject the null hypothesis, \(H_0\), based on the sample data.
+        The steps involved in hypothesis testing are as follows:</p>
+    <ol> 
+            <li><strong>Two-tailed Test: </strong></li>
+            <ul class = "left-aligned">
+                <li>\(H_0 : \quad \mu = \mu_0\)</li>
+                <li>\(H_a : \quad \mu \neq \mu_0\)</li>
+            </ul>
+
+            <li><strong>Left-tailed Test: </strong></li>
+            <ul class = "left-aligned">
+                <li>\(H_0 : \quad \mu = \mu_0\)</li>
+                <li>\(H_a : \quad \mu < \mu_0\)</li>
+            </ul>
+
+            <li><strong>Right-tailed Test: </strong></li>
+            <ul class = "left-aligned">
+                <li>\(H_0 : \quad \mu = \mu_0\)</li>
+                <li>\(H_a : \quad \mu > \mu_0\)</li>
+            </ul>
+        </ol>
+    <h4 class = "left-aligned">Provide the following values:</h4>
+    <div class = "multi-column-list">        
+            <ul>
+                <li> Sample mean: \(\bar{x}\) </li> 
+                <li> Population mean: \(\mu_0\) </li>
+                <li> Sample size: \(n\) </li>
+                <li> Sample Std: \(s\) </li>
+                <li> Significance Level: \(\alpha\)</li>
+            </ul>
+    </div>
+     <h4 class = "left-aligned">We find the following values:</h4>
+    <div class = "multi-column-list">        
+            <ul>
+                <li> Test Statistic, \(T\) = \( \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \) </li>
+                <li> P-value:
+                    <ul>
+                        <li> \( P(t > |T|) \) for two-tailed test (area under the curve in both tails beyond \(\pm |T|\))</li>
+                        <li>\( P(T < t) \) for right-tailed test (area under the curve to the right of \(T\))</li>
+                        <li> \( P(T > t) \) for left-tailed test (area under the curve to the left of \(T\)) </li>
+                        
+                    </ul> 
+                <li>Critical Value: 
+                    <ul>
+                        <li>\(\pm t_{\alpha/2}\) (for two-tailed test)</li>
+                        <li> \( t_{\alpha} \) (for right-tailed test)</li>
+                        <li> -\( t_{\alpha} \) (for left-tailed test)</li>
+                    </ul>
+                </li>
+                <li> Non - rejection Region for \(\bar{x}\):
+                    <ul>
+                        <li> \(\left(\mu_0 - \frac{s}{\sqrt{n}}t_{\alpha/2}, \quad \mu_0 + \frac{s}{\sqrt{n}}t_{\alpha/2}\right)\) for two-tailed test.</li>
+                        <li> \( \left( -\infty, \quad \mu_0 + \frac{s}{\sqrt{n}}t_{\alpha} \right) \) for right-tailed test.</li>
+                        <li> \( \left(\mu_0 - \frac{s}{\sqrt{n}}t_{\alpha}, \quad \infty \right) \) for left-tailed test.</li>
+                    </ul>
+                </li>
+                <li> Non - rejection Region for \(T\):
+                    <ul>
+                        <li> \(\left(-t_{\alpha/2}, \quad t_{\alpha/2}\right)\) for two-tailed test.</li>
+                        <li> \( \left( -\infty, \quad t_{\alpha} \right) \) for right-tailed test.</li>
+                        <li> \( \left(-t_{\alpha}, \quad \infty \right) \) for left-tailed test.</li>
+                    </ul>
+                </li>
+                
+            </ul>
+    </div>
+    <h3 class = "left-aligned">Conclusion:</h3>
+        <ul>
+            <li>Do not reject \(H_0\) if Test Statistic, \(T\) is in the non-rejection interval for \(T\). Else 
+                reject \(H_0\) in favor of alternative hypothesis.
+            </li>
+            <b>OR</b>
+            </br>
+            <li> Do not reject \(H_0\) if P-Value is bigger than \(\alpha\). Else reject \(H_0\) in favor of alternative hypothesis.</li> 
+            <b>OR</b>
+            <li> Do not reject \(H_0\) if the sample mean (\(\bar{x}\)) is in the non-rejection interval for \(\bar{x}\). Else reject \(H_0\) in favor of alternative hypothesis.</li>
+        </ul>
+
+
+
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+    <h3>Provide the following values to perform hypothesis testing: </h3>
+        <hr style = "border: 1px solid #1a1717; width: 100%;">
+
+        <br> <br>
+    
+                
+                Sample mean: <input type="number" id="sample_mean" value="" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp; &nbsp; &nbsp;
+                Population mean: <input type="number" id="population_mean" value="" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp; &nbsp; &nbsp; 
+         
+                Sample size: <input type="number" id="sample_size" value="" style="width: 100px; border-radius: 5px;" required> <br> <br>
+          
+                Sample std: <input type="number" id="sample_std" value="" style="width: 100px; border-radius: 5px;" required>&nbsp; &nbsp; &nbsp; &nbsp;
+                               
+                Significance Level: <input type="number" id="alpha1" value="" style="width: 100px; border-radius: 5px;" required>&nbsp; &nbsp; &nbsp; &nbsp;
+            
+                Df: <input type="number" id="df1" value="" style="width: 100px; border-radius: 5px;" required>
+            
+                <br> <br>
+                <label> Select Hypothesis Type: </label>
+                <select name = "Type" id = "Type" required>
+                    <option value="two-tailed" >Two-tailed</option>
+                    <option value="left-tailed" >Left-tailed</option>
+                    <option value="right-tailed" >Right-tailed</option>
+                </select>
+          
+        </br> </br>
+
+      
+            <input type="submit" class = "fancy-button"  onclick="hypothesis_testing_sigmaunknown()" style="width: 200px; border-radius: 5px;">
+
+
+         <br> <br>
+            <p id = 'hypothesis-result'></p> <br>
+        <img id="hypothesis-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">
+        </div>
+
+      
+    </div>
+            
+
+    
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/popmean_unknown.js') }}"></script>
+{% endblock %}

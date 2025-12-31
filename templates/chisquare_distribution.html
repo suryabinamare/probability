@@ -1,0 +1,97 @@
+{% extends "sidebar.html" %}
+{% block content %}
+
+<div class="container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h1>Chi-square Distribution</h1>
+    <h3 class="left-aligned">Information about Chi-square distribution:</h3>
+    <p class="left-aligned">
+        The Chi-square distribution is a special case of the gamma distribution and is 
+        used primarily in hypothesis testing, particularly in tests of independence and goodness of fit. 
+        It is characterized by a single parameter, the degrees of freedom (df), which determines the shape of the distribution. 
+        The Chi-square distribution is right-skewed and takes only non-negative values.
+    </p>
+
+    <ol> 
+        <li><strong>\(\chi^2\) - score:</strong> The value of the Chi-square statistic you want to evaluate. This value 
+            is plotted along the horizontal axis as the red dot.
+        </li>
+        <li><strong>P-value:</strong> The probability of observing a value as extreme as the \(\chi^2\) - score. This value 
+            represents the area under the curve to the right of the \(\chi^2\) - score and is shaded blue in the plot.
+        </li>
+    </ol>
+</div>
+
+
+
+
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h4 class = "left-aligned">Shape of the Chi-square Distribution</h4>
+    <p class = "left-aligned">The shape of the Chi-square distribution depends on the degrees of freedom (df). As the degrees of freedom increase, 
+    the distribution becomes more symmetric and approaches a normal distribution. For low degrees of freedom, the distribution is highly skewed to the right.
+    Below you can see the Chi-square distribution for different degrees of freedom.</p>
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">  
+            <strong>Degrees of Freedom (df): <input type="number" id="df_plot" step="any" style="width: 100px; border-radius: 5px;"></strong> &nbsp;&nbsp;  &nbsp;&nbsp;
+            <br> <br>
+            <button onclick="drawChiSquareDistribution()" class="fancy-button" style="width: 200px; border-radius: 5px;"> Calculate </button>    &nbsp;&nbsp;  &nbsp;&nbsp;
+            <button onclick = "reset1()" class="fancy-button" style="width: 200px; border-radius: 5px;"> Reset </button>
+    </div>
+    <div style="margin-top:20px; text-align: center;">
+        <img id="plot" src="" style="width:600px; border-radius:10px; border:1px solid #ccc; margin-top:15px;"/>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container"  style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h4 class="left-aligned">Provide the following values</h4>
+    <ul> 
+        <li>Provide \(\chi^2\) - score and degree of freedom to find P-value (leave P-value box blank)</li>
+        
+        <p>OR</p>
+        
+        <li>Provide P-value and degree of freedom to find \(\chi^2\) - score (leave \(\chi^2\) - score box blank)</li>
+    </ul>
+
+   
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+    padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">  
+        <strong>\(\chi^2\) - score: <input type="number" id="chi2-score" step="any" style="width: 100px; border-radius: 5px;"></strong> &nbsp;&nbsp; or &nbsp;&nbsp;
+        <strong>Degrees of Freedom (df): <input type="number" id="df" step="any" style="width: 100px; border-radius: 5px;"></strong> &nbsp;&nbsp; or &nbsp;&nbsp;
+        <strong>P-value: <input type="number" id="p-value" step="any" style="width: 100px; border-radius: 5px;"></strong>
+        <br> <br>
+        <button onclick="calculateChiSquareDistribution()" class="fancy-button" style="width: 200px; border-radius: 5px;"> Calculate </button>    
+    </div>
+    <div id="chi2-results" class = "container1" style="margin-top:20px;"></div>
+  
+</div>
+
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/distributions.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,101 @@
+
+{% extends "sidebar.html" %}
+{% block content %}
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+    <h1>Z-Distribution</h1>     
+
+    <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
+        padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
+    
+        <h3 class = "left-aligned">Information about Z-distribution:</h3>
+        <p class = "left-aligned">
+        The Z-distribution, also known as the standard normal distribution, is a special case of the normal distribution 
+        with a mean of 0 and a standard deviation of 1. It is symmetric about the vertical line through 0 and has a bell-shaped curve. 
+        The Z-distribution is used in hypothesis testing and confidence interval estimation when the population standard deviation 
+        is known or when the sample size is large enough to apply the Central Limit Theorem.</p>
+        </p>
+
+        <p class = "left-aligned" >The area under the density curve is 1. P-value represents the area of a region
+            under the curve which is shaded blue.  Z-score is plotted along the horizontal axis as the red dot.
+            <ul>
+                <li><b> Z-score: </b> This is the value of the Z-statistic you want to evaluate. This value is plotted
+                    along the horizontal axis as the red dot. You can find the Z-score when you know the P-value.</li>
+                <li><b> P-value: </b>This value
+                    represents the area under the curve to the left of the Z-score and is shaded blue in the plot.
+                For \(z_0\), the p-value is given by \(p(z \leq z_0)\). </br>
+                If you want to find the area to the right of \(z_0\), </br>
+                    \(p(z\geq z_0) = 1 - p(z\leq z_0)\)</li>
+
+            </li>
+            </ul> 
+    </div> <br> <br> 
+
+
+
+ <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
+        padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
+      
+    <h3 class = "left-aligned">Shape of the Z-Distribution</h3>
+    <p class = "left-aligned">Shape of the normal curve is bell-shaped and symmetric about the mean. The mean is the center of the distribution, 
+        and the standard deviation controls the spread of the curve. Below you can draw multiple curves by specifying different means and standard deviations. </p></br> </br>
+    
+    <div  style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+    <b>Mean (μ):</b> <input type = "number" id = "mean"  value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp;&nbsp;
+    <b>Std Dev (σ):</b> <input type = "number" id = "std" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp;&nbsp;
+    <br> <br>
+    
+    <button onclick = "addCurve()" class = "fancy-button" style="width: 200px; border-radius: 5px;"> Draw Curve </button> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button onclick = "resetPlot()" class = "fancy-button" style="width: 200px; border-radius: 5px;"> Reset </button>
+    </div>
+    <br> <br>
+    <div style="display: grid;place-items: center;">
+    <img id="plot" src="" style="text-align:center; width:600px; border-radius: 10px; border:1px solid #ccc;">
+        </div>
+</div>
+    <br> <br>
+
+
+
+
+
+
+
+
+
+
+
+    <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
+        padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
+        <h3 class = "left-aligned">Find Z-score or P-value</h3>
+        <p class = "left-aligned">Below we find Z-score for given P-value or P-value for given Z-score. The P-value represents the area to the left of the Z-score.
+            If you want to find the area to the right of the Z-score, use (1 - P-value).
+        </p> </br> 
+        
+        <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+            padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;"
+        <h5 >Provide the following values:</h5>   <br> <br>
+        
+            <strong>z-score:</strong> <input type="number" id = "z-value"  step="any" style="width: 100px; border-radius: 5px;"> &nbsp;&nbsp; or &nbsp;&nbsp;
+            <strong>p-value:</strong> <input type="number" id = "p-value"  step="any" style="width: 100px; border-radius: 5px;"><br> <br>
+                
+            
+            <button  type = "button" onclick = "pz_value()" class = "fancy-button" style="width: 200px; border-radius: 5px;">Submit</button>       
+            <br> <br>
+            <div id = "zp-results"> <br> 
+            <img id="zp-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">
+    </div>
+    
+</div>
+
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/distributions.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends "sidebar.html" %}
+{% block title %}One Population Mean{% endblock %}
+{% block content %}
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+<h2>Comparing two population means (variances unknown and unequal)</h2>
+<p class = "left-aligned"> We compare two populations means. The data are independent samples from normally 
+    distributed populations. We compare and test whether the mean, \(\mu_1\) of population 1 is equal to the 
+    mean, \(\mu_2\) of population 2. We consider the difference \(\mu_1 - \mu_2\) whose point estimate 
+    is given by the difference of sample means, \(\bar{x}_1 - \bar{x}_2\). 
+</p>
+<p class = "left-aligned">
+    In this section, we provide the point estimage, the \((1-\alpha)100\%\) 
+    confidence interval of \(\mu_1 - \mu_2\), and perform hypothesis testing if \(\mu_1 = \mu_2\).
+    We consider the population standard deviations \(\sigma_1\) and \(\sigma_2\) to be unknown and 
+    unequal. We replace  \(\sigma_1\) and \(\sigma_2\) with sample standard deviations, \(s_1\) and \(s_2\). So the 
+    random variable \(\displaystyle t = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \) 
+    follows approximately t-distribution with degree of freedom: 
+    \(\displaystyle \Delta = \frac{\left( s_1^2/n_1 + s_2^2/n_2 \right)^2}{ \displaystyle \frac{\left(s_1^2/n_1 \right)^2}{n_1 - 1} + \frac{\left(s_2^2/n_2 \right)^2}{n_2 - 1}} \)
+    rounded down to the nearest integer.
+</p>
+<h3 class = "left-aligned">
+  <strong> \(\underline{(1-\alpha)100\% \quad \text{Confidence Interval for} \quad  \mu_1 - \mu_2}\):</strong>
+</h3>
+<p class = "left-aligned">
+    <ul> 
+        <li>
+                \(\displaystyle CI = \Bigg((\bar{x}_1 - \bar{x}_2) - t_{\alpha/2}.\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}, \quad
+                (\bar{x}_1 - \bar{x}_2) + t_{\alpha/2}.\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\\ \Bigg)\) 
+                Where \(t_{\alpha/2}\) is the t-value such that the area to the right is \(\alpha/2\) with DoF, \(\Delta\) <br>
+        </li>
+        OR <br>
+        <li> 
+                \(\displaystyle CI = \Big( (\bar{x}_1 - \bar{x}_2) - ME, \quad (\bar{x}_1 - \bar{x}_2) + ME \Big)\), <br> 
+                where \(ME = t_{\alpha/2}.\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\displaystyle \) is the margin of error. 
+        </li>
+    </ul>
+  
+               <br> <br>
+
+</p>
+
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+        <label for="mu0"><h4>Provide the following values to calculate and plot CI:</h4></label> <br><br>
+        <strong> Sample Mean (\(\bar{x}_1\)):  </strong><input type = "number"  id = "sample_mean1" value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample Mean (\(\bar{x}_2)\): </strong> <input type = "number" id = "sample_mean2" value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sample size, \(n_1\): </strong> <input type = "number" id = "sample_size1" value = "20" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample size, \( n_2\): </strong> <input type = "number" id = "sample_size2" value = "20" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sample std, \(s_1\): </strong> <input type = "number" id = "sample_std1" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample std, \(s_2 \): </strong> <input type = "number" id = "sample_std2" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sig. Level, \(\alpha\): </strong> <input type = "number" id = "alpha_ci" value = "0.1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+       
+        
+        <br><br>
+        <button  id = "calculate-btn" onclick="CalculateCI_twomean_unequalvar()" class = "fancy-button" style="width: 200px; border-radius: 5px;">Calculate CI</button>
+        
+        <br><br>
+        <hr style = "border: 3px solid blakc;">
+        <p id="ci-result"></p>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+       
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
+
+<h3 class = "left-aligned"><u> Hypothesis Testing (non pooled t-test:)</u> </h3>
+
+    <p class = 'left-aligned' style = "text-align:left; font-size: larger;"> We state the hypothesis to prove that if two means are equal or one is greater/smaller than the other.
+
+
+        <ol style = "text-align:left; font-size: larger;"> 
+            <li><strong> Two-tailed Test:</strong> </li>
+            <ul >
+                <li>\(H_0 : \quad \mu_1 = \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1-\mu_2 = 0\)</li>
+                <li>\(H_a : \quad \mu_1 \neq \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1 - \mu_2 \neq 0\)</li>
+            </ul>
+
+            <li><strong> Left-tailed Test:</strong> </li>
+            <ul >
+                <li>\(H_0 : \quad \mu_1 = \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1 = \mu_2\)</li>
+                <li>\(H_a : \quad \mu_1 < \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1-\mu_2 <0 \)</li>
+            </ul>
+
+            <li><strong>Right-tailed Test: </strong></li>
+            <ul >
+                <li>\(H_0 : \quad \mu_1 = \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1 = \mu_2\)</li>
+                <li>\(H_a : \quad \mu_1 > \mu_2\) &nbsp; &nbsp; or &nbsp; &nbsp; \(\mu_1-\mu_2>0\)</li>
+            </ul>
+        </ol>
+
+
+
+
+
+<h3 class = "left-aligned">We have the following values:</h3>
+    <ul>
+        <li> Sample sizes: \(n_1, n_2\).</li>
+        <li> Sample means: \(\bar{x}_1, \bar{x}_2\)</li>
+        <li> Sample standard deviations: \(s_1, s_2\).</li>
+        <li> Population means: \(\mu_1, \mu_2\).</li>
+        <li> Difference in population means: \(\mu_1 - \mu_2\).</li>
+        <li> Significance level: \(\alpha\).</li>
+    </ul>
+   
+    <h3 class = "left-aligned">We find the following values:</h3>
+    <ul>
+        <li> Test statistic: \(t_{\text{test}} = \displaystyle \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)}}
+    = \displaystyle \frac{(\bar{x}_ - \bar{x}_2)}{\sqrt{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)}} \)
+        (under the null hypothesis, \(\mu_1 = \mu_2\)).</li>
+        <li> Critical value: \(t_{\text{crit}} \)</li>
+        <li> P-value: \(p\)</li>
+        
+    </ul>
+    
+
+    <h3 class = "left-aligned">Conclusion:</h3>
+        <ul>
+            <li>Do not reject \(H_0\) if Test Statistic, \(t_{\text{test}}\) is in the non-rejection region. Else 
+                reject \(H_0\) in favor of alternative hypothesis.
+            </li>
+            <b>OR</b>
+            <br>
+            <li> Do not reject \(H_0\) if P-Value is bigger than \(\alpha\). Else reject \(H_0\) in favor of alternative hypothesis.</li> 
+       </ul>
+
+       <br> <br>
+
+
+
+
+
+
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+        <label for="mu0"><h4><strong>Provide the following values to calculate values and plot:</strong></h4></label> <br><br>
+        <strong> Sample Mean (\(\bar{x}_1\)):  </strong><input type = "number"  id = "hypo_sample_mean1" value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample Mean (\(\bar{x}_2\)): </strong> <input type = "number" id = "hypo_sample_mean2" value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sample size, \(n_1\): </strong> <input type = "number" id = "hypo_sample_size1" value = "20" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample size, \( n_2\): </strong> <input type = "number" id = "hypo_sample_size2" value = "20" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sample std, \(s_1\): </strong> <input type = "number" id = "hypo_sample_std1" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        <strong> Sample std, \(s_2 \): </strong> <input type = "number" id = "hypo_sample_std2" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;<br> <br>
+        <strong> Sig. Level, \(\alpha\): </strong> <input type = "number" id = "hypo_alpha_ci" value = "0.1" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;&nbsp; &nbsp;
+        
+        </br> </br>
+    
+                <label> <strong>Select Hypothesis Type: </strong> </label>
+                <select id = "Type" required>
+                    <option value="two-tailed" >Two-tailed</option>
+                    <option value="left-tailed" >Left-tailed</option>
+                    <option value="right-tailed">Right-tailed</option>
+                </select>
+        
+        </br> </br>
+        <br><br>
+        <button onclick="hypotesting_twomeans_unequalvar()" class = "fancy-button" style="width: 200px; border-radius: 5px;">Calculate Values</button>
+        
+        <br><br>
+        <hr style = "border: 3px solid black;">
+        <p id="ci-result-hypo"></p>
+        <img id="twopopmeans-varunequal-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/diff_popmean_unequalvar.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends "sidebar.html" %}
+{% block title %}Population Proportion  {% endblock %}
+{% block content %}
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: larger;">
+    <h3>Point Estimation and Confidence Intervals for a Population Proportion</h3>
+    <p class = "left-aligned"> Suppose we have a sample of size \(n\) with \(x\) successes (or have a 
+        specified attribute). The sample proportion, \(\hat{p} = \frac{x}{n}\) is the ratio of successes in the sample.
+        In orther words, a sample proportion is the ratio of values that hold a specified attribute divided by the  
+        total sample size. 
+        The sample proportion, \(\hat{p}\), is a random variable that estimates the population proportion, \(p\). 
+       <p class = "left-aligned"> The  distribution of \(\hat{p}\) is approximately normal if the sample size is large enough, with mean \(\mu_{\hat{p}} = p\) 
+        and standard deviation \(\sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}\).
+        As \(p\) is unknown, we cannot use this distribution. Instead we replace \(p\) with \(\hat{p}\).
+    And for large sample size and \(hat{p}\) such that both \(n.\bar{p}\) and \(n.(1-\hat{p})\)
+        is greater than 5. We use the z-distribution for \(\hat{p}\)</p>
+    </p>
+    <p style = "text-align: left">
+        <h4 class = "left-aligned"> <b> Point Estimate and Confidence Interval: </b></h4>
+    </p>
+    <p>      
+        <ol >
+            <li>Calculate the sample proportion \(\hat{p} = \frac{x}{n}\), the unbiased point estimate of the population proportion. 
+            </li>
+            <li>Determine the critical value (\(z_{\text{crit}} = z_{\alpha/2}\)): 
+            </li>
+            <li>Compute the standard error, \(se = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\).</li>
+            <li> Margin of error, \(me = z_{\alpha/2} \cdot se\)</li>
+            <li>(\(1-\alpha\))% confidence interval: <br>
+                  CI = 
+                \( \displaystyle 
+                \hat{p} \pm z_{\alpha/2} \cdot \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \) <br> 
+                or <br> 
+                CI = \( \left(\hat{p} - z_{\alpha/2} \cdot \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}, \hat{p} + z_{\alpha/2} \cdot \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\right)\).
+                <br> or </br> CI = \(\qquad \left(\hat{p} - me, \hat{p} + me\right)\)
+            </li>
+        </ol>  
+        <br> <br>  
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+       
+        <h3>Provide the following values to calculate and plot </h3> <br> <br>
+        <strong> Sample size: \(n\)</strong> = <input type = "number" id = "sample_size1" value = "30" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;
+        <strong> Sample Prop: \(\hat{p}\) = </strong> <input type = "number" id = "sample_prop1" value = "0.5" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;
+        <strong> Sig. Level: \(\alpha\) = </strong> <input type = "number" id = "alpha1" value = "0.1" style="width: 100px; border-radius: 5px;" required> <br> <br> 
+        <button onclick = "calculate_ci_oneprop()" class = "fancy-button"  style="width: 200px; border-radius: 5px;">Calculate CI</button>
+        
+        <br><br>
+            <hr style = "border: 3px solid black;">
+            <p id="ci-result-proportion1"></p>
+            <img id="proportion1-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">    
+    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: larger;">   
+<h3 class = "left-aligned"> <b>Hypothesis Testing for a Proportion: </b> </h3>
+    <p class = "left-aligned">We perform hypothesis testing for a population proportion.
+        We use the z-test to determine whether to reject or fail to reject the null hypothesis, \(H_0\), based on the sample data.
+        The steps involved in hypothesis testing are as follows:</p>
+    <ol style = "font-size: large;"> 
+            <li><strong> Two-tailed Test:</strong> </li>
+            <ul >
+                <li>\(H_0 : \quad p = p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+                <li>\(H_a : \quad p \neq p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+            </ul>
+
+            <li><strong> Left-tailed Test:</strong> </li>
+            <ul >
+                <li>\(H_0 : \quad p = p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+                <li>\(H_a : \quad p < p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+            </ul>
+
+            <li><strong>Right-tailed Test: </strong></li>
+            <ul >
+                <li>\(H_0 : \quad p = p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+                <li>\(H_a : \quad p > p_0\) &nbsp; &nbsp;  &nbsp; &nbsp; </li>
+            </ul>
+        </ol>
+
+         <h4 class = "left-aligned">Provide the following values:</h4>
+    <div class = "multi-column-list">        
+            <ul>
+                <li> Sample size: \(n\) </li> 
+                <li> Sample Proportion: \(\hat{p}\) </li>
+                <li> Population Proportion: \(p_0\) </li>
+                <li> Significance Level: \(\alpha\)</li>
+            </ul>
+    </div>
+
+
+    <h3 class = "left-aligned">We find the following values: </h3>
+        <ul> 
+            <li> Test Statistic, \(z_{\text{test}}\) = \(\displaystyle \frac{\hat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}\)</li>
+            <li> Critical Value: \(z_{\text{crit}}\) </li>
+            <li> P-Value: </li>
+                <ul>
+                    <li> \(= P(z < |z_{\text{test}}|) \) = area to the left and right of \(z_{\text{test}}\) (two-tailed test) </li>
+                    <li> \(= P(z > z_{\text{test}}) \) = area to the right of \(z_{\text{test}}\) (right-tailed test)</li>
+                    <li> \(= P(z < z_{\text{test}}) \) = area to the left of \(z_{\text{test}}\) (left-tailed test)</li>
+                   
+                </ul>
+            
+        </ul>
+
+        <h3 class = "left-aligned">Conclusion:</h3>
+        <ul>
+            <li>Do not reject \(H_0\) if \(z_{\text{test}}\) is in the non-rejection region. Else 
+                reject \(H_0\) in favor of alternative hypothesis.
+            </li>
+            <b>OR</b>
+            </br>
+            <li> Do not reject \(H_0\) if P-Value is bigger than \(\alpha\). Else reject \(H_0\) in favor of alternative hypothesis.</li> 
+       </ul>
+
+        <br> <br>
+    <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
+       
+        <h3>Provide the following values to calculate and plot </h3> <br> <br>
+        <strong> Sample size: \(n\)</strong> = <input type = "number" id = "sample_size_ht1" value = "30" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;
+        <strong> Sample Prop: \(\hat{p}\) = </strong> <input type = "number" id = "sample_prop_ht1" value = "0.5" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp; <br> <br> 
+        <strong> Pop. Prop: \(p_0\) = </strong> <input type = "number" id = "null_prop_ht1" value = "0.5" style="width: 100px; border-radius: 5px;" required> &nbsp; &nbsp;
+        <strong> Sig. Level: \(\alpha\) = </strong> <input type = "number" id = "alpha_ht1" value = "0.05" style="width: 100px; border-radius: 5px;" required> <br> <br>
+        <strong> Test Type: </strong>
+        <select id="test_type" style="width: 150px; border-radius: 5px;">
+            <option value="two-tailed">Two-tailed</option>
+            <option value="left-tailed">Left-tailed</option>
+            <option value="right-tailed">Right-tailed</option>
+        </select>
+        <br><br>
+        <button onclick = "calculate_ht_oneprop()" class = "fancy-button"  style="width: 200px; border-radius: 5px;">Calculate Values</button>  
+            <hr style = "border: 3px solid black;">
+
+            <p id="proportion-ht1-result"></p>
+            <img id="proportion-ht1-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">
+    
+    
+    </div>
+            
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/popproportion1.js') }}"></script>
+{% endblock %}
