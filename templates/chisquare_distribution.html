@@ -1,6 +1,9 @@
 {% extends "sidebar.html" %}
 {% block content %}
 
+
+
+<div class = "wrapper">
 <div class="container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
     <h1>Chi-square Distribution</h1>
     <h3 class="left-aligned">Information about Chi-square distribution:</h3>
@@ -20,13 +23,14 @@
         </li>
     </ol>
 </div>
+</div>
 
 
 
 
 
 
-
+<div class = "wrapper">
 <div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
     <h4 class = "left-aligned">Shape of the Chi-square Distribution</h4>
     <p class = "left-aligned">The shape of the Chi-square distribution depends on the degrees of freedom (df). As the degrees of freedom increase, 
@@ -42,6 +46,7 @@
     <div style="margin-top:20px; text-align: center;">
         <img id="plot" src="" style="width:600px; border-radius:10px; border:1px solid #ccc; margin-top:15px;"/>
     </div>
+</div>
 </div>
 
 
@@ -63,7 +68,7 @@
 
 
 
-
+<div class = "wrapper">
 <div class="container"  style = "font-family: 'times New Roman', Times, serif; font-size: large;">
     <h4 class="left-aligned">Provide the following values</h4>
     <ul> 
@@ -82,9 +87,13 @@
         <strong>P-value: <input type="number" id="p-value" step="any" style="width: 100px; border-radius: 5px;"></strong>
         <br> <br>
         <button onclick="calculateChiSquareDistribution()" class="fancy-button" style="width: 200px; border-radius: 5px;"> Calculate </button>    
+    <br> <br> 
+    <hr> 
+    <br> 
+    <div id="chi2-results"></div>
     </div>
-    <div id="chi2-results" class = "container1" style="margin-top:20px;"></div>
   
+</div>
 </div>
 
 

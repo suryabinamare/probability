@@ -168,7 +168,7 @@ def generate_chisquare_plot():
         plt.plot(x, y1, color='black')  # x-axis
         plt.plot(x1, y, color='black')  # y-axis
         plt.plot(df, 0, 'ro')  # mean point
-        plt.axvline(df, color='red', linestyle='--')
+        plt.axvline(df, color='red', linestyle='--', label = "mean")
         
     plt.title("Chi-Square Distributions")
 
@@ -401,6 +401,7 @@ def generate_f_plot():
         #plt.axvline(mean, color='red', linestyle='--')
         
     plt.title("F-Distributions")
+    plt.grid(True)
 
     plt.legend()
     #plt.grid(True)

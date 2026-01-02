@@ -12,6 +12,9 @@ from routes.populationproportion import populationproportion_bp
 from routes.chisquare import chisquare_bp
 from routes.linear import linear_bp
 from routes.anova import anova_bp
+from routes.admin import admin_bp
+
+from routes.database import init_db, close_db
 
 
 
@@ -36,8 +39,14 @@ app.register_blueprint(populationproportion_bp, url_prefix="/populationproportio
 app.register_blueprint(chisquare_bp, url_prefix="/chisquare")
 app.register_blueprint(linear_bp, url_prefix="/linear")
 app.register_blueprint(anova_bp, url_prefix = "/anova")
+app.register_blueprint(admin_bp, url_prefix = "/admin")
 
 
+
+app.teardown_appcontext(close_db)
+
+with app.app_context():
+    init_db()
 
 
 # Ensure upload folder exists
