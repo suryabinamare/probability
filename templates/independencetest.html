@@ -239,8 +239,8 @@
 
 <div class = "wrapper">
 <div class = "container" style="margin-top:40px;"> 
-      <h2 style="text-align:left;">Practice Yourself: </h2>
-      <p style="text-align:left; font-size: larger;">Below you fill in your own data for the Chi-square independence test. You can 
+      <h3 class = "left-aligned" style="text-align:left;">Practice Yourself: </h3>
+      <p class = "left-aligned" style="text-align:left; font-size: large;">Below you fill in your own data for the Chi-square independence test. You can 
         provide the data in a tabular format by adding or deleting rows and columns as needed.
         After entering your data, specify the significance level (α) for the test and click on
         the "Compute" button to perform the Chi-square independence test. The results will include the Chi-square statistic,
@@ -290,6 +290,9 @@
            style="width:100px; border-radius:5px;" /> &nbsp;&nbsp;
 <button onclick="sendTableData()" class = "fancy-button" style = "margin-right:10px;border-radius: 5px;">Upload!</button>
 <br> <br>
+<div id = "loading" style="display:none; color: blue; font-weight:bold;">
+  Uploading / Processing...........
+</div>
 
 <img id="chi2Plot" src="" style="margin-top:20px; max-width:100%; height:auto; border-radius:10px;">
 <img id = "chiPlot" src="" style="margin-top:20px; max-width:100%; height:auto; border-radius:10px;">
@@ -364,7 +367,8 @@
   <p style="text-align:left;">The plot below shows the Chi-square distribution with 
     the calculated degrees of freedom, <br> critical value, test statistic, p-value, and 
     rejection region. </p> <br>
-    <button onclick="showOutput('chi_plot')" style = "margin-right:10px;background-color: #95cfdd; border-radius: 5px;">Show Chi-Square Plot</button>
+    <button onclick="showOutput('chi_plot')" style = "margin-right:10px;background-color: #95cfdd; border-radius: 5px;">
+      Show Chi-Square Plot</button>
     <br> <br> 
     <div id="chi_plot" class="output-box"></div>
  

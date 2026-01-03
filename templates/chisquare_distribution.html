@@ -6,7 +6,7 @@
 <div class = "wrapper">
 <div class="container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
     <h1>Chi-square Distribution</h1>
-    <h3 class="left-aligned">Information about Chi-square distribution:</h3>
+    <h3 class="left-aligned">Introduction:</h3>
     <p class="left-aligned">
         The Chi-square distribution is a special case of the gamma distribution and is 
         used primarily in hypothesis testing, particularly in tests of independence and goodness of fit. 
@@ -32,10 +32,15 @@
 
 <div class = "wrapper">
 <div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
-    <h4 class = "left-aligned">Shape of the Chi-square Distribution</h4>
-    <p class = "left-aligned">The shape of the Chi-square distribution depends on the degrees of freedom (df). As the degrees of freedom increase, 
-    the distribution becomes more symmetric and approaches a normal distribution. For low degrees of freedom, the distribution is highly skewed to the right.
-    Below you can see the Chi-square distribution for different degrees of freedom.</p>
+    <h3 class = "left-aligned">Shape of the Distribution</h3>
+    <p class = "left-aligned">The shape of the Chi-square distribution is determined by its degrees of freedom (df). 
+        When the degrees of freedom are small, the distribution is strongly skewed to the right, with a long tail extending
+         toward larger values. As the degrees of freedom increase, the curve becomes less skewed, more balanced, and gradually 
+         begins to resemble a normal distribution. </p>
+
+    <p class = "left-aligned">For sufficiently large degrees of freedom, the Chi-square distribution appears nearly symmetric, although it always remains 
+    defined only for non-negative values. In the visualization below, you can compare Chi-square curves for different degrees of
+    freedom and observe how increasing df affects the shape and spread of the distribution.</p>
     <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
         padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">  
             <strong>Degrees of Freedom (df): <input type="number" id="df_plot" step="any" style="width: 100px; border-radius: 5px;"></strong> &nbsp;&nbsp;  &nbsp;&nbsp;
@@ -70,7 +75,7 @@
 
 <div class = "wrapper">
 <div class="container"  style = "font-family: 'times New Roman', Times, serif; font-size: large;">
-    <h4 class="left-aligned">Provide the following values</h4>
+    <h3 class="left-aligned">Provide the following values:</h3>
     <ul> 
         <li>Provide \(\chi^2\) - score and degree of freedom to find P-value (leave P-value box blank)</li>
         

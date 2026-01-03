@@ -3,28 +3,32 @@
 {% block content %}
 
 
-
+<div class = "wrapper">
 <div class = "container" style = "font-family: 'times New Roman', Times, serif; font-size: large;">
     <h1>Z-Distribution</h1>     
 
     <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
         padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
     
-        <h3 class = "left-aligned">Information about Z-distribution:</h3>
+        <h3 class = "left-aligned">Introduction:</h3>
         <p class = "left-aligned">
-        The Z-distribution, also known as the standard normal distribution, is a special case of the normal distribution 
-        with a mean of 0 and a standard deviation of 1. It is symmetric about the vertical line through 0 and has a bell-shaped curve. 
-        The Z-distribution is used in hypothesis testing and confidence interval estimation when the population standard deviation 
-        is known or when the sample size is large enough to apply the Central Limit Theorem.</p>
+        The Z-distribution, also called the standard normal distribution, is a specific form of the normal distribution 
+        with a mean of 0 and a standard deviation of 1. Its graph is bell-shaped and symmetric about zero, meaning values 
+        equidistant from the center have equal probabilities. The Z-distribution is commonly used in hypothesis testing 
+        and confidence interval estimation, particularly when the population standard deviation is known or when the 
+        sample size is large enough for the Central Limit Theorem to apply. The total area under the probability density 
+        curve equals 1, representing all possible outcomes. In the visualization, the P-value is shown as a blue shaded
+         region under the curve, while the Z-score appears as a red dot along the horizontal axis.</p>
         </p>
 
         <p class = "left-aligned" >The area under the density curve is 1. P-value represents the area of a region
             under the curve which is shaded blue.  Z-score is plotted along the horizontal axis as the red dot.
             <ul>
-                <li><b> Z-score: </b> This is the value of the Z-statistic you want to evaluate. This value is plotted
-                    along the horizontal axis as the red dot. You can find the Z-score when you know the P-value.</li>
-                <li><b> P-value: </b>This value
-                    represents the area under the curve to the left of the Z-score and is shaded blue in the plot.
+                <li><b> Z-score: </b> The Z-score represents the standardized value you are analyzing. It tells you 
+                how far your observation is from the mean in terms of standard deviation. In this app, the Z-score is 
+            plotted on the graph so you can visually see where it lies on the distribution. </li>
+                <li><b> P-value: </b>The P-value is the probability of observing a value less than or equal to the 
+                    selected Z-score. It corresponds to the blue shaded area under the curve to the left of the red dot. 
                 For \(z_0\), the p-value is given by \(p(z \leq z_0)\). </br>
                 If you want to find the area to the right of \(z_0\), </br>
                     \(p(z\geq z_0) = 1 - p(z\leq z_0)\)</li>
@@ -38,11 +42,13 @@
  <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
         padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
       
-    <h3 class = "left-aligned">Shape of the Z-Distribution</h3>
-    <p class = "left-aligned">Shape of the normal curve is bell-shaped and symmetric about the mean. The mean is the center of the distribution, 
-        and the standard deviation controls the spread of the curve. Below you can draw multiple curves by specifying different means and standard deviations. </p></br> </br>
+    <h3 class = "left-aligned">Shape of the Density Curve:</h3>
+    <p class = "left-aligned">The normal distribution curve is bell-shaped and symmetric around its mean. The mean (
+ μ) determines the center of the curve, while the standard deviation (𝜎) controls its spread. Larger standard deviations 
+ result in wider curves, and smaller values produce narrower curves. 
+In this tool, you can draw and compare multiple curves by adjusting the mean and standard deviation values. </p></br> </br>
     
-    <div  style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+    <div  style = "margin-top: 20px; justify-content:center; background-color: rgb(228, 224, 234);
         padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;">
     <b>Mean (μ):</b> <input type = "number" id = "mean"  value = "0" style="width: 100px; border-radius: 5px;" required> &nbsp;&nbsp;
     <b>Std Dev (σ):</b> <input type = "number" id = "std" value = "1" style="width: 100px; border-radius: 5px;" required> &nbsp;&nbsp;
@@ -71,11 +77,19 @@
     <div  id = "ci-result-container" style = "margin-top: 20px; background-color: aliceblue;
         padding: 30px; border-radius: 10px; text-align: left; margin:auto; font-size:large"">
         <h3 class = "left-aligned">Find Z-score or P-value</h3>
-        <p class = "left-aligned">Below we find Z-score for given P-value or P-value for given Z-score. The P-value represents the area to the left of the Z-score.
-            If you want to find the area to the right of the Z-score, use (1 - P-value).
+        <p class = "left-aligned">This section allows you to compute either the Z-score for a given P-value or the P-value 
+            for a given Z-score. The P-value shown corresponds to the area to the left of the Z-score. If you need the area 
+            to the right, calculate it using 
+        1- P-value
+        Provide one of the following:</p>
+        <ul>
+            <li> Z-score, or</li>
+            <li>P-value</li>
+        </ul>
+           <p class = "left-aligned"> Click Submit to view the result and see it visualized on the graph
         </p> </br> 
         
-        <div style = "margin-top: 20px; justify-content:center; background-color: aliceblue;
+        <div style = "margin-top: 20px; justify-content:center; background-color: rgb(228, 224, 234);
             padding: 15px; border-radius: 10px; text-align: center; margin: auto; width: fit-content;"
         <h5 >Provide the following values:</h5>   <br> <br>
         
@@ -89,6 +103,7 @@
             <img id="zp-plot" src="" style="width:600px; border-radius: 10px; border:1px solid #ccc;">
     </div>
     
+</div>
 </div>
 
 

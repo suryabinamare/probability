@@ -94,6 +94,7 @@ let result = {};
 async function sendTableData() {
     const table = document.getElementById("dataTable");
     const alpha = parseFloat(document.getElementById("alpha").value);
+    const loadingDiv = document.getElementById("loading");
     // Columns labels
     const colLabels = [];
     table.querySelectorAll("thead th input").forEach(input => {
@@ -103,6 +104,8 @@ async function sendTableData() {
     const rows = table.querySelectorAll("tbody tr");
     const rowLabels = [];
     const data = [];
+
+    
 
     rows.forEach(row => {
         rowLabels.push(row.querySelector("th input").value);
@@ -120,14 +123,24 @@ async function sendTableData() {
         alpha: alpha
     };      
 
-    const response = await fetch("/chisquare/independence-test", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    }); 
-    result = await response.json();
+
+    loadingDiv.style.display = "block";
+
+    try{
+        const response = await fetch("/chisquare/independence-test", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        }); 
+        result = await response.json();
+    } catch (error) {
+        console.error(err);
+        alert("Upload Failed!");
+    } finally {
+        loadingDiv.style.display = "none";
+    }
     document.getElementById("result").innerHTML = "Observed Frequencies <br>" + result.observed_df;
     
     
